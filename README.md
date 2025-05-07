@@ -28,6 +28,7 @@ O documento a seguir descreve o processo de criação de um chatbot utilizando a
 Para evitar problemas com "recursos indisponíveis", tanto o workspace quanto os demais recursos foram provisionados com a localidade **Brazil South**.  
 Essa escolha tornou o processo um pouco mais lento, porém possibilitou o acesso a uma maior disponibilidade de recursos.  
 ![Criação de Workspace](inputs/imgs/conf_workspace.png)  
+
 ![Workspace vazio](inputs/imgs/empty_workspace.png)  
 
 ---
