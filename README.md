@@ -1,14 +1,10 @@
-<table>
-  <tr>
-    <td style="vertical-align: middle;">
-      <img src="https://media.licdn.com/dms/image/v2/D5612AQG6Mf0a5ezeag/article-cover_image-shrink_600_2000/B56ZT.izGkGUAU-/0/1739437323394?e=2147483647&v=beta&t=bWArTk4rhC2ycAywx87tHYPDX7w50Nu4cscwyZm-rBY" alt="selo" width="100">
-    </td>
-    <td style="vertical-align: middle;">
-      <h1>Azure Foundry - Chatbot</h1>
-      <p>Chatbot baseado em conteúdos PDFs utilizando o Azure Foundry</p>
-    </td>
-  </tr>
-</table>
+<p>
+  <img src="https://media.licdn.com/dms/image/v2/D5612AQG6Mf0a5ezeag/article-cover_image-shrink_600_2000/B56ZT.izGkGUAU-/0/1739437323394?e=2147483647&v=beta&t=bWArTk4rhC2ycAywx87tHYPDX7w50Nu4cscwyZm-rBY" alt="selo" width="100" style="vertical-align: middle; margin-right: 10px;">
+  <strong style="font-size: 40px;">Azure Foundry - Chatbot</strong>
+</p>
+
+Chatbot baseado em conteúdos PDFs utilizando o Azure Foundry
+
 O documento a seguir descreve o processo de criação de um modelo de predição de vendas futuras, utilizando a plataforma do Azure Machine Learning. Durante esse projeto, foi utilizado como base um arquivo criado em Python para a criação do dataset (base de dados).
 
 Sabendo que o objetivo da predição a ser realizada tem como base a quantidade de vendas conforme a temperatura do dia, foi utilizado um código que gera um arquivo .csv. Esse arquivo foi criado no script:
