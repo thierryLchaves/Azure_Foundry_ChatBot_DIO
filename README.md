@@ -64,10 +64,12 @@ As seguintes especificações foram utilizadas na criação do recurso:
 | 2/9                           | US$ 150,29               | 2 réplicas e 1 partição                                         |
 
 ![Configuração básica Azure AI Search](inputs/imgs/conf_basic_aas.png)  
+
 ![Configuração de escala Azure AI Search](inputs/imgs/conf_escala_aas.png)  
 
 As configurações de rede e marcas do serviço foram mantidas como padrão.  
 ![Configuração de rede Azure AI Search](inputs/imgs/conf_rede_aas.png)  
+
 ![Configuração de marcas Azure AI Search](inputs/imgs/conf_marcas_ass.png)  
 
 Com as configurações devidamente realizadas, o serviço foi criado e integrado ao workspace.  
@@ -95,6 +97,7 @@ As seguintes especificações foram utilizadas:
 
 As demais configurações foram mantidas com os valores padrão.  
 ![Resumo das configurações Azure AI Foundry](inputs/imgs/conf_resum_aaf.png)  
+
 ![Implantação bem-sucedida Azure AI Foundry](inputs/imgs/impl_aaf.png)  
 
 Com os recursos primários devidamente implantados, dá-se início ao processo de criação e treinamento do chatbot.
@@ -118,6 +121,7 @@ Dentro da opção "Models + Endpoints", são apresentados todos os modelos já i
 
     (Para o projeto em questão, será criado apenas um modelo básico.)
 ![Model + Endpoint](inputs/imgs/aaf_model_endpoint.png)
+
 ![Opções de modelos e endpoints](inputs/imgs/aaf_model_endpoint_2.png)  
 
 ### 2.3 Configurando o modelo 
