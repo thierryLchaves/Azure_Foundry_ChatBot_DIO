@@ -54,7 +54,8 @@ Sendo assim, foram criados os seguintes recursos:
 
 ### 1.2 Azure AI Search
 
-Para que o chatbot a ser criado tenha um viés baseado nos documentos fornecidos, é necessário criar o recurso **[Azure AI Search](#azure-ai-search)**.Após selecionar o tipo de modelo a ser implantado, será apresentada a tela para seleção dos modelos de agente disponíveis. 
+Para que o chatbot a ser criado tenha um viés baseado nos documentos fornecidos, é necessário criar o recurso **[Azure AI Search](#azure-ai-search)**.Após selecionar o tipo de modelo a ser implantado, será apresentada a tela para seleção dos modelos de agente disponíveis.  
+ 
 ![Marketplace Azure AI Search](inputs/imgs/mkp_AzureaiSearch.png)  
 
 As seguintes especificações foram utilizadas na criação do recurso:
