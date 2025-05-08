@@ -36,8 +36,7 @@ O documento a seguir descreve o processo de criação de um chatbot utilizando a
 Para evitar problemas com "recursos indisponíveis", tanto o workspace quanto os demais recursos foram provisionados com a localidade **East US**.
 Obs.: Durante a configuração do projeto, foi identificado que o modelo de linguagem GPT-4o não possuía cotas disponíveis para implantação como Global Standard, então foi adotada a implementação de outro modelo disponível, e visando a celeridade de processamento do processo foi selecionado a localidade mencionada.
 
-![Criação de Workspace](inputs/imgs/conf_workspace.png)  
-
+![Criação de Workspace](inputs/imgs/conf_workspace.png) 
 ![Workspace vazio](inputs/imgs/empty_workspace.png)  
 
 ---
