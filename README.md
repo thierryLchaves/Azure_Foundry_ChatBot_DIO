@@ -71,8 +71,7 @@ As seguintes especificações foram utilizadas na criação do recurso:
 | **Unidades de Pesquisa**      | **Custo Estimado por Mês** | **Réplicas e Partições**                                        |
 | 2/9                           | US$ 150,29               | 2 réplicas e 1 partição                                         |
 
-![Configuração básica Azure AI Search](inputs\imgs\conf_basic_aas.png)  
-
+![Configuração básica Azure AI Search](inputs/imgs/conf_basic_aas.png)
 ![Configuração de escala Azure AI Search](inputs/imgs/conf_escala_aas.png)  
 
 As configurações de rede e marcas do serviço foram mantidas como padrão.  
@@ -88,7 +87,10 @@ Com as configurações devidamente realizadas, o serviço foi criado e integrado
 ### 1.3 Azure AI Foundry
 
 Com o serviço **Azure AI Search** instalado e configurado, foi realizada a implantação do serviço **Azure AI Foundry**.  
+
 ![Marketplace Azure AI Foundry](inputs/imgs/mkp_AzureAIFoundry.png)  
+
+---  
 
 Ao iniciar a criação do serviço, a plataforma direciona automaticamente para a criação de um **HUB**, responsável por armazenar os projetos que serão desenvolvidos futuramente.
 
@@ -119,9 +121,11 @@ Nesse menu, é possível não apenas criar um novo projeto para o hub, como tamb
 ### 2.1 Criação do projeto
 Dentro desse menu de Overview, ao clicar na opção de "Novo Projeto", será apresentada uma tela para nomear o novo projeto a ser desenvolvido.
 ![Criando um novo projeto](inputs/imgs/aaf_create_proj.png)  
-Após a criação, o usuário é direcionado ao centro de gerenciamento do projeto, onde será feita a configuração propriamente dita. Nessa mesma tela, já é possível visualizar, além dos endpoints disponíveis, quais são os recursos conectados ao projeto.
+Após a criação, o usuário é direcionado ao centro de gerenciamento do projeto, onde será feita a configuração propriamente dita. Nessa mesma tela, já é possível visualizar, além dos endpoints disponíveis, quais são os recursos conectados ao projeto.  
+
 ![Centro de Gerenciamento de Projeto](inputs/imgs/aaf_gerencia_proj.png)
 
+--- 
 ### 2.2 Criando o agente
 Para criar um novo agente para o projeto, devemos acessar a opção de "Models + Endpoints" correspondentes ao projeto desejado.
 #### Criando um novo modelo 
