@@ -4,10 +4,10 @@
 
 # Azure Foundry - Chatbot
 
-Chatbot baseado em conteúdos PDFs utilizando o Azure Foundry
+Chatbot baseado em conteúdos de arquivos PDF utilizando o Azure Foundry
 
 
-O documento a seguir descreve o processo de criação de um chatbot utilizando a plaforma **Azure Foundry**, desde a configuração dos componentes necessários, para aplicação e treinamento do modelo, bem como demonstração de uso e aplicação do modelo na prática. 
+O documento a seguir descreve o processo de criação de um chatbot utilizando a plataforma **Azure Foundry**, desde a configuração dos componentes necessários, para aplicação e treinamento do modelo, bem como demonstração de uso e aplicação do modelo na prática. 
 
 ## Índice
 
@@ -18,22 +18,23 @@ O documento a seguir descreve o processo de criação de um chatbot utilizando a
 - [2. Azure AI Foundry Studio](#2-azure-ai-foundry-studio)
   - [2.1 Criando um novo Projeto](#21-criação-do-projeto)
   - [2.2 Criando um agente](#22-criando--agente)
-  - [2.3 Criando um novo Projeto](#23-implantando-modelos)
-    - [2.3.1 Adicionando dados no Projeto](#231-adicionando-os-dados)    
-    - [2.3.2 Contextualizando o chat](#232-contextualizando-o-chat)    
+  - [2.3 Implantação de Modelos e Configuração da Solução ](#23-implantação-de-modelos-e-configuração-da-solução)
+    - [2.3.1 Configurando o Chatbot](#231-configurando-o-chatbot)    
+    - [2.3.2 Adicionando os Dados](#232-adicionando-os-dados)    
+    - [2.3.3 Definindo o Contexto](#233-definindo-o-contexto)    
+    - [2.3.4 Exemplos de Conversação](#234-exemplos-de-conversação)   
 - [3. Avaliando o modelo](#3-avaliando-o-modelo)
-    - [3.1 Avaliando Manualmente](#31-avaliacao-manual)    
-    - [3.2 Avaliando De forma Automatizada](#32-avaliacao-aAvaliação)    
-- [Funcionalidades](#funcionalidades)
-- [Licença](#licenca)
+    - [3.1 Avaliando Manualmente](#31-avaliação-manual)    
+    - [3.2 Avaliando De forma Automatizada](#32-avaliação-automatizada)    
+- [4. Conclusão](#4-conclusão)
 
 
-## 1. Workspace-e-Recursos
+## 1. Workspace e Recursos
 
 **Para o início do projeto, foi criada uma workspace nomeada como `proj-02-Dio`:**
 
 Para evitar problemas com "recursos indisponíveis", tanto o workspace quanto os demais recursos foram provisionados com a localidade **East US**.
-Ps: Durante a configuração do projeto foi visualizado que o modelo de linguagem gpt-4o,não possuia quotas disponíveis para implantação como Global Standard, então foi adotado a implementação de outro modelo disponível, e visando a celeridade de processamento do processo foi selecionado a localidade mencionada.
+Obs.: Durante a configuração do projeto, foi identificado que o modelo de linguagem GPT-4o não possuía cotas disponíveis para implantação como Global Standard, então foi adotada a implementação de outro modelo disponível, e visando a celeridade de processamento do processo foi selecionado a localidade mencionada.
 
 ![Criação de Workspace](inputs/imgs/conf_workspace.png)  
 
@@ -54,7 +55,7 @@ Sendo assim, foram criados os seguintes recursos:
 
 ### 1.2 Azure AI Search
 
-Para que o chatbot a ser criado tenha um viés baseado nos documentos fornecidos, é necessário criar o recurso **[Azure AI Search](#azure-ai-search)**. Com este recurso em nosso workspace, será possível realizar o upload de arquivos PDF que servirão como fonte de busca do modelo durante sua configuração.  
+Para que o chatbot a ser criado tenha um viés baseado nos documentos fornecidos, é necessário criar o recurso **[Azure AI Search](#azure-ai-search)**.Após selecionar o tipo de modelo a ser implantado, será apresentada a tela para seleção dos modelos de agente disponíveis. 
 ![Marketplace Azure AI Search](inputs/imgs/mkp_AzureaiSearch.png)  
 
 As seguintes especificações foram utilizadas na criação do recurso:
@@ -133,49 +134,77 @@ Dentro da opção "Models + Endpoints", são apresentados todos os modelos já i
 
 ![Opções de modelos e endpoints](inputs/imgs/aaf_model_endpoint_2.png)  
 
-### 2.3 Implantando modelos  
-Após selecionar o tipo de modelo a ser implantado será apresentado a tela para seleção de modelos de agente disponiveis 
+### 2.3 Implantação de Modelos e Configuração da Solução  
+A seguir, descrevem-se as etapas de implantação dos modelos de linguagem, adição dos dados, configuração do ambiente de chat e definição do contexto necessário para o funcionamento do assistente inteligente baseado em IA.
  ![Lista de modelos](inputs/imgs/aff_lista_de_modelos.png)  
 
-**Observação** Durante a implantação do modelo é importante se atentar a quantia de quotas diposniveis, é possível se consultar em QUOTA
+**Observação**: Durante a implantação do modelo, é importante atentar-se à quantidade de cotas disponíveis. Essa informação pode ser consultada na opção **QUOTA**.  
 ![Consulta de cota Azure AI Foundry](inputs\imgs\aff_quota.png)  
 
-No projeto implantado foi utilizado 2 modelos de lingaguem para criação do chat em questão sendo eles `gpt-4o-mini` e `text-embedding-3-large`.
-Com os modelos criados e disponíveis para o projeto, enfim pode ser dado inicio ao projeto de criação, no acesso do projeto criado, podemos da inicio a configuração do chatbot. 
-Acessando a opção de menu **"Playground"**, é possível inicializar a configuração do modelo do chat a ser utilizado. 
+Neste projeto, foram utilizados dois modelos de linguagem para a criação do chatbot:  
+
+- `gpt-4o-mini`
+- `text-embedding-3-large`
+
+Com os modelos criados e disponíveis para uso no projeto, foi possível iniciar o processo de configuração do chatbot. A partir do acesso ao projeto no Azure AI Foundry, deve-se navegar até o menu **"Playground"** para dar início à configuração do modelo de chat.
+ 
 ![Visão Geral de projeto Azure AI Foundry](inputs\imgs\aff_visao_geral_proj.png)
 
-### Configurando o chatbot
-Na área de Playground, do seu projeto pode ser acessado a opção de playground de chat, nessa área será configurado o comportamento do chat, seu contexto, sua base de pesquisa e realizado os testes de do chat. 
+### 2.3.1 Configurando o Chatbot
+
+Na área de **Playground**, é possível acessar a seção de configuração do chatbot. Nessa etapa, são definidos:
+
+- O comportamento do chat,
+- A base de conhecimento a ser utilizada,
+- Os testes iniciais com o modelo.
 
 ![Playground de chat Azure AI Foundry](inputs\imgs\aaf_playground_chat.png)
 
-Antes de realizar a enganharia de prompt para o chatbot, a ser feito irei selecionar a base de dados PDFs nos quais o chat irá se embasar, para realizar sua pesquisa "inviesada".
-### 2.3.1 Adicionando os dados 
-selecionando a opção de `Adicionar seus dados`,é possível indicar ao chat qual será a fonte de dados de pesquisa, como a ideia do projeto e realizar um chat que gere insights para um TCC, a ser realizado. Selecionado apção em questão será possível é apresentado a lista de fontes possíveis de pesquisa, no caso será escolhida opção de carregar arquivos. 
+Antes de realizar a engenharia de prompt, é necessário definir a base de dados (PDFs) que será utilizada como fonte para as respostas do chatbot. Essa base irá guiar a pesquisa e o contexto das respostas, formando uma base de conhecimento enviesada e especializada.
+
+---
+
+### 2.3.2 Adicionando os Dados
+
+Selecionando a opção **"Adicionar seus dados"**, é possível indicar ao chat a fonte de pesquisa. Como o objetivo do projeto é gerar insights para TCCs, foi escolhida a opção de carregar arquivos PDF diretamente.  
 
 ![Fonte de dados](inputs\imgs\aff_escolha_de_dados.png)
 
-Com os dados devidamente carregados será solicitado então a configuração do índice, e é nesse paso que utilizaremos o recurso previamente criado de [Serviço de pesquisa](#12-azure-ai-search), foi para isso que o serviço anteriormente criado foi adicionado ao workspace,nesta mesma opção de configuração ainda  é possível que seja escolhido o tipo de computação a ser utilizada para tal.  
+Com os arquivos carregados, é necessário configurar o **índice de busca**, etapa na qual utilizamos o recurso previamente criado de [Serviço de Pesquisa](#12-azure-ai-search). Esse serviço foi adicionado ao workspace e será responsável pela indexação e ranqueamento dos conteúdos.
 
-![Configuração de índice](inputs\imgs\aff_conf_indice.png)  
+![Configuração de índice](inputs/imgs/aff_conf_indice.png) 
 
-No ultimo passo de configuração adicionaremos então o outro modelo criado para o projeto o **"text-embedding-3-large"**
+Na configuração final, adicionamos o modelo **"text-embedding-3-large"** para realizar o mapeamento vetorial dos conteúdos.
 
-![Configuração de pesquisa](inputs\imgs\aff_conf_pesquisa.png)  
+![Configuração de pesquisa](inputs/imgs/aff_conf_pesquisa.png)  
 
-Ainda na configurações definir os métodos de pesquisa na base de dados, se será uma busca vetorizada, palavra chave, semânticas, híbrido ( palavra-chave + busca vetorizada), ou híbrida + semântica. Ainda é possíveis configurações adicionais para o chat a ser criado como quantia de mensagens anteriores, quantidade de respostas máxima por gasto de token, 
-temperatura e p, para o caso do chat como desejo que o chat me de insigths de um tcc deixei limitado em 0.56, que dará uma certa liberdade criativa porém não muito.  
+Também foram definidos os métodos de busca na base:
 
-![Parâmetros de chat](inputs\imgs\aaf_param_chat.png)  
+- Vetorial,
+- Por palavra-chave,
+- Semântica,
+- Híbrida (combinação de vetorial + palavra-chave),
+- Híbrida + semântica.
+
+Outros parâmetros configurados incluem:
+
+- Número de mensagens anteriores consideradas,
+- Limite de tokens por resposta,
+- Temperatura (ajustada para **0.56**, oferecendo uma leve criatividade, mas mantendo o foco informativo).
+
+![Parâmetros de chat](inputs/imgs/aaf_param_chat.png)
 
 Após as configurações adicionaremos o contexto para o chat e outras informações nas `instruções e contexto de modelo`
 
+---
 
-### 2.3.2 Contextualizando o chat
-Para a personalização do chat implementado foram utilizada algumas técnicas de enenharia de prompt, RAG(feito no passo anterior, ao inserir os PDFs para formar base de conhecimentos), também foi realizado exemplos de uso mesmo que primários, e algumas váriaveis de uso 
-  #### Contexto e instruções de comportamento
-  "Identidade e Propósito:
+### 2.3.3 Definindo o Contexto
+
+Após as configurações anteriores, foram inseridas instruções detalhadas para personalizar o comportamento do chatbot. A engenharia de prompt aplicou técnicas como RAG (Recover-Augmented Generation) com base nos PDFs carregados, além de exemplos de uso e variáveis personalizadas.
+
+#### Contexto e Instruções de Comportamento
+```
+  Identidade e Propósito:
     Você é um assistente de Inteligência Artificial chamado "TcChat!". Seu principal objetivo é ajudar alunos a obter insights, esclarecimentos e informações relevantes sobre trabalhos de conclusão de curso (TCC).
 
     Cursos Atendidos:
@@ -224,36 +253,34 @@ Para a personalização do chat implementado foram utilizada algumas técnicas d
 
     - Se o usuário desejar discutir uma área diferente, verifique se a dúvida continua dentro de sua base de conhecimento técnica.
 
-    - Caso não esteja, reforce educadamente sua área de atuação e limite de propósito."
-  
+    - Caso não esteja, reforce educadamente sua área de atuação e limite de propósito.
+  ```
 ![Parâmetros de chat](inputs\imgs\aff_context_chat.png)  
 
-#### Variáveis e Exemplos de conversa  
+#### Variáveis e Exemplos de Conversa  
 
-Para otimização de alguns casos, principalmente para ínicio de conversação foram configurados tanto exemplos de conversação como váriaveis de utilização. 
+Para facilitar interações iniciais, foram definidas variáveis e exemplos de diálogo. 
 ![Exemplos de conversa e váriaveis](inputs\imgs\aff_var_exemp.png)  
 
   #### Exemplo 1:
-    #Customer:
-      - Olá chat!
-    #System:
-    - Olá eu sou {{chat}}, estou aqui para lhe ajudar com informações sobre os temas: {{cursos}}. Sobre qual dessas áreas você deseja saber mais?
+  ``` Customer: Olá chat!
+    System: Olá, eu sou {{chat}}. Estou aqui para lhe ajudar com informações sobre os temas: {{cursos}}. Sobre qual dessas áreas você deseja saber mais?
+  ```
 
   #### Exemplo 2:
-    #Customer:
-      - Olá tcchat!
-    #System:
-    - Olá estou aqui para lhe ajudar com informações sobre os temas: {{cursos}}. Sobre qual dessas áreas você deseja saber mais?
-
+  ```
+    Customer: Olá tcchat!
+    System: Olá! Estou aqui para lhe ajudar com informações sobre os temas: {{cursos}}. Sobre qual dessas áreas você deseja saber mais?
+  ```
   #### Exemplo 3:
-    #Customer:
-      - Queria uma ideia sobre como faço um tcc
-    #System:
-    - Sobre qual dessas áreas você deseja saber mais? 
-    {{cursos}}
+  '''
+   Customer: Queria uma ideia sobre como faço um TCC
+   System: Sobre qual dessas áreas você deseja saber mais?
+   {{cursos}}
+  '''
 
-### 2.3.4 Exemplos de converssação 
-Após a configuração do projeto foi realizado algumas interações com o chat diretamente do playground antes de realizar sua avaliação. 
+### 2.3.4 Exemplos de Conversação 
+Após a configuração, foram realizados testes diretamente no Playground para validar o comportamento do chatbot. 
 ![Exemplos de interação](inputs\imgs\aaf_conversa_chat.png)  
 ![Exemplos de interação](inputs\imgs\aaf_conversa_chat_2.png)  
 ![Exemplos de interação](inputs\imgs\aaf_conversa_chat_3.png)  
@@ -262,16 +289,41 @@ Após a configuração do projeto foi realizado algumas interações com o chat 
 Para avaliação do modelo a ser implantado é possível realizar dois tipos de avaliações, manual ou automatizada, para melhor exploração do modelo foram realizadas os 2 tipos avaliações. 
 
 ### 3.1 Avaliação manual
-Dentro da avaliação manual do modelo a ser implantado consiste em inserir os parâmetros básicos do chat, como os descritos em [Na contextutalização do chat](#232-contextualizando-o-chat), e posteiormente ir inserindo possíveis perguntas manuais conforme o usuário o faria, e em seguida realizar a resposta esperada, nos moldes atuais do projeto, o sistema está com uma grande acuracia. 
+Dentro da avaliação manual do modelo a ser implantado consiste em inserir os parâmetros básicos do chat, como os descritos em [Na contextutalização do chat](#232-contextualizando-o-chat), e posteiormente ir inserindo possíveis perguntas manuais conforme o usuário o faria, e em seguida realizar a resposta esperada, nos moldes atuais do projeto, o sistema apresenta alta acurácia.
 ![Avaliação de Manual](inputs\imgs\aaf_aval_manual.png)  
 
 ### 3.2 Avaliação Automatizada
-Ao ser selecionado a `avaliação automatizada`, o sistema irá criar um especie de **"JOB"** para realizar a avaliação do modelo que será implantado. O mesmo é consultado através das avaliações na barra lateral esquerda do sistema. 
+Ao ser selecionado a `avaliação automatizada`, o sistema irá criar um espécie de **"JOB"** para realizar a avaliação do modelo que será implantado. O mesmo é consultado através das avaliações na barra lateral esquerda do sistema. 
 ![Avaliação de Automatizada](inputs\imgs\aaf_aval_autom.png)  
 Com esse serviço é possivél visualizar nos seus inputs quais foram as perguntas e resposta geradas 
 ![trabalho gerados pela automatizada](inputs\imgs\aff_trabalhos_gerados.png)  
 No modelo atual foram alcançadas médias de 4 pontos percentuais, e uma coerência de 5 pontos conforme podemos visualizar nos gráficos gerados pelo trabalho
 ![Gráficos gerados pela automatizada](inputs\imgs\aaf_graf_autom.png) 
+
+### 3.3 Observações 
+Após a implementação e testes do modelo o mesmo foi importado para futura utilização, de outros modelos de chat ou outra implementação utilizando tais arquivos constam em [Arquivo modelo ZIP](inputs\TCCHAT.zip) e [Arquivo modelo JSON](inputs\ChatSetup.json)
+
+## 4. Conclusão 
+ 
+
+1. Resumo dos Resultados:
+
+  O chatbot foi implementado com sucesso usando o Azure AI Foundry, integrando os recursos de Azure AI Search e GPT-4o-mini para fornecer respostas inteligentes baseadas em documentos PDF. A solução atendeu às expectativas de auxiliar os usuários na elaboração de TCCs nas áreas de Análise e Desenvolvimento de Sistemas, Sistemas de Informação e Técnico em Sistemas da Informação.
+
+2. Desafios Enfrentados:
+
+  A limitação na disponibilidade do modelo de linguagem GPT-4o como Global Standard foi um obstáculo, mas a escolha de um modelo alternativo garantiu que o projeto fosse concluído com sucesso. Além disso, a configuração da indexação e a definição do contexto de busca nos PDFs exigiram ajustes para garantir que as respostas fossem precisas e relevantes.
+
+3. Oportunidades de Melhoria:
+
+  A utilização de uma base de dados maior e mais diversificada pode ajudar a expandir as capacidades do chatbot, incluindo áreas adicionais de conhecimento. O aprimoramento das respostas, com base em mais interações e feedback dos usuários, poderia aumentar a precisão do modelo de linguagem, tornando-o mais adaptável e eficaz.
+
+4. Conclusão Final:
+
+  O projeto demonstrou a versatilidade do `Azure AI Foundry` em conjunto com o `Azure AI Search` para a criação de chatbots especializados em domínios específicos. Ao utilizar um modelo de **LLM**, o chatbot foi enriquecido com uma inteligência artificial que aprimora as respostas sem perder o controle sobre elas. A ferramenta oferece diversos modelos e configurações que tornam o chatbot mais seguro, confiável, escalável e parametrizável conforme a necessidade de uso.
+
+
+
 
 
 <table style="text-align: center; width: 100%;"> 
