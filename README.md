@@ -55,7 +55,7 @@ Sendo assim, foram criados os seguintes recursos:
 ### 1.2 Azure AI Search
 
 Para que o chatbot a ser criado tenha um viés baseado nos documentos fornecidos, é necessário criar o recurso **[Azure AI Search](#azure-ai-search)**.Após selecionar o tipo de modelo a ser implantado, será apresentada a tela para seleção dos modelos de agente disponíveis.  
- 
+
 ![Marketplace Azure AI Search](inputs/imgs/mkp_AzureaiSearch.png)  
 
 As seguintes especificações foram utilizadas na criação do recurso:
@@ -143,7 +143,7 @@ A seguir, descrevem-se as etapas de implantação dos modelos de linguagem, adi�
  ![Lista de modelos](inputs/imgs/aff_lista_de_modelos.png)  
 
 **Observação**: Durante a implantação do modelo, é importante atentar-se à quantidade de cotas disponíveis. Essa informação pode ser consultada na opção **QUOTA**.  
-![Consulta de cota Azure AI Foundry](inputs\imgs\aff_quota.png)  
+![Consulta de cota Azure AI Foundry](inputs/imgs/aff_quota.png)  
 
 Neste projeto, foram utilizados dois modelos de linguagem para a criação do chatbot:  
 
@@ -152,7 +152,7 @@ Neste projeto, foram utilizados dois modelos de linguagem para a criação do ch
 
 Com os modelos criados e disponíveis para uso no projeto, foi possível iniciar o processo de configuração do chatbot. A partir do acesso ao projeto no Azure AI Foundry, deve-se navegar até o menu **"Playground"** para dar início à configuração do modelo de chat.
  
-![Visão Geral de projeto Azure AI Foundry](inputs\imgs\aff_visao_geral_proj.png)
+![Visão Geral de projeto Azure AI Foundry](inputs/imgs/aff_visao_geral_proj.png)
 
 ### 2.3.1 Configurando o Chatbot
 
@@ -162,7 +162,7 @@ Na área de **Playground**, é possível acessar a seção de configuração do 
 - A base de conhecimento a ser utilizada,
 - Os testes iniciais com o modelo.
 
-![Playground de chat Azure AI Foundry](inputs\imgs\aaf_playground_chat.png)
+![Playground de chat Azure AI Foundry](inputs/imgs/aaf_playground_chat.png)
 
 Antes de realizar a engenharia de prompt, é necessário definir a base de dados (PDFs) que será utilizada como fonte para as respostas do chatbot. Essa base irá guiar a pesquisa e o contexto das respostas, formando uma base de conhecimento enviesada e especializada.
 
@@ -172,7 +172,7 @@ Antes de realizar a engenharia de prompt, é necessário definir a base de dados
 
 Selecionando a opção **"Adicionar seus dados"**, é possível indicar ao chat a fonte de pesquisa. Como o objetivo do projeto é gerar insights para TCCs, foi escolhida a opção de carregar arquivos PDF diretamente.  
 
-![Fonte de dados](inputs\imgs\aff_escolha_de_dados.png)
+![Fonte de dados](inputs/imgs/aff_escolha_de_dados.png)
 
 Com os arquivos carregados, é necessário configurar o **índice de busca**, etapa na qual utilizamos o recurso previamente criado de [Serviço de Pesquisa](#12-azure-ai-search). Esse serviço foi adicionado ao workspace e será responsável pela indexação e ranqueamento dos conteúdos.
 
@@ -259,12 +259,12 @@ Após as configurações anteriores, foram inseridas instruções detalhadas par
 
     - Caso não esteja, reforce educadamente sua área de atuação e limite de propósito.
   ```
-![Parâmetros de chat](inputs\imgs\aff_context_chat.png)  
+![Parâmetros de chat](inputs/imgs/aff_context_chat.png)  
 
 #### Variáveis e Exemplos de Conversa  
 
 Para facilitar interações iniciais, foram definidas variáveis e exemplos de diálogo. 
-![Exemplos de conversa e váriaveis](inputs\imgs\aff_var_exemp.png)  
+![Exemplos de conversa e váriaveis](inputs/imgs/aff_var_exemp.png)  
 
   #### Exemplo 1:
   ``` Customer: Olá chat!
@@ -285,24 +285,24 @@ Para facilitar interações iniciais, foram definidas variáveis e exemplos de d
 
 ### 2.3.4 Exemplos de Conversação 
 Após a configuração, foram realizados testes diretamente no Playground para validar o comportamento do chatbot. 
-![Exemplos de interação](inputs\imgs\aaf_conversa_chat.png)  
-![Exemplos de interação](inputs\imgs\aaf_conversa_chat_2.png)  
-![Exemplos de interação](inputs\imgs\aaf_conversa_chat_3.png)  
+![Exemplos de interação](inputs/imgs/aaf_conversa_chat.png)  
+![Exemplos de interação](inputs/imgs/aaf_conversa_chat_2.png)  
+![Exemplos de interação](inputs/imgs/aaf_conversa_chat_3.png)  
 
 ## 3. Avaliando o Modelo
 Para avaliação do modelo a ser implantado é possível realizar dois tipos de avaliações, manual ou automatizada, para melhor exploração do modelo foram realizadas os 2 tipos avaliações. 
 
 ### 3.1 Avaliação manual
 Dentro da avaliação manual do modelo a ser implantado consiste em inserir os parâmetros básicos do chat, como os descritos em [Na contextutalização do chat](#232-contextualizando-o-chat), e posteiormente ir inserindo possíveis perguntas manuais conforme o usuário o faria, e em seguida realizar a resposta esperada, nos moldes atuais do projeto, o sistema apresenta alta acurácia.
-![Avaliação de Manual](inputs\imgs\aaf_aval_manual.png)  
+![Avaliação de Manual](inputs/imgs/aaf_aval_manual.png)  
 
 ### 3.2 Avaliação Automatizada
 Ao ser selecionado a `avaliação automatizada`, o sistema irá criar um espécie de **"JOB"** para realizar a avaliação do modelo que será implantado. O mesmo é consultado através das avaliações na barra lateral esquerda do sistema. 
-![Avaliação de Automatizada](inputs\imgs\aaf_aval_autom.png)  
+![Avaliação de Automatizada](inputs/imgs/aaf_aval_autom.png)  
 Com esse serviço é possivél visualizar nos seus inputs quais foram as perguntas e resposta geradas 
-![trabalho gerados pela automatizada](inputs\imgs\aff_trabalhos_gerados.png)  
+![trabalho gerados pela automatizada](inputs/imgs/aff_trabalhos_gerados.png)  
 No modelo atual foram alcançadas médias de 4 pontos percentuais, e uma coerência de 5 pontos conforme podemos visualizar nos gráficos gerados pelo trabalho
-![Gráficos gerados pela automatizada](inputs\imgs\aaf_graf_autom.png) 
+![Gráficos gerados pela automatizada](inputs/imgs/aaf_graf_autom.png) 
 
 ### 3.3 Observações 
 Após a implementação e testes do modelo o mesmo foi importado para futura utilização, de outros modelos de chat ou outra implementação utilizando tais arquivos constam em [Arquivo modelo ZIP](inputs\TCCHAT.zip) e [Arquivo modelo JSON](inputs\ChatSetup.json)
